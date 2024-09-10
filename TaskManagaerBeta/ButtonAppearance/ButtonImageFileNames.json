@@ -1,0 +1,8 @@
+{
+  "StopUpdate": "black_square_for_stop.png",
+  "Start": "arrow_forward.png",
+  "Search": "mag_right.png",
+  "NewProcess": "new.png",
+  "ClownMode": "clown_face.png",
+  "Update": "arrows_counterclockwise.png"
+}

@@ -1,4 +1,4 @@
-﻿<Window x:Class="TaskManagaerBeta.TaskManager"
+﻿<Window x:Class="TaskManagaerBeta.Views.TaskManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -105,7 +105,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type DataGridCell}">
                         <Grid Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center" />
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -116,11 +116,27 @@
         <local:TaskBar DockPanel.Dock="Top"/>
         <Grid ShowGridLines="False" DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition x:Name="LeftPanel" Width="0.4*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid Column="0" Background="#292929">
-                
+                <Grid ShowGridLines="False">
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="0.15*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid >
+                        <StackPanel x:Name="StackPanel" HorizontalAlignment="Right">
+                            <Button Margin="10" Width="40" Background="Transparent" Click="HideShow" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
+                                <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                                <Button.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Button.RenderTransform>
+                                <Image Source="/ButtonAppearance/Images/symbols.png"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
             </Grid>
             <Grid Column="1" Background="#1c1c1c">
                 <Grid ShowGridLines="False">
@@ -130,7 +146,14 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Margin="40 20 10 20" Background="Transparent" Command="{Binding StopUpdateCommand}" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
+                            <Button Margin="0 20 30 20" Background="Transparent" Command="{Binding StartClownModeCommand}" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
+                                <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                                <Button.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                </Button.RenderTransform>
+                                <Image Source="{Binding ClownModeButtonImage}"/>
+                            </Button>
+                            <Button Margin="0 20 10 20" Background="Transparent" Command="{Binding StopUpdateCommand}" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
                                 <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
                                 <Button.RenderTransform>
                                     <ScaleTransform ScaleX="1" ScaleY="1" />
@@ -144,32 +167,26 @@
                                 </Button.RenderTransform>
                                 <Image Source="{Binding StartButtonImage}"></Image>
                             </Button>
-                            <TextBox Margin="30 20 0 20" Width="200" BorderThickness="0"></TextBox>
-                            <Button Margin="10 20 5 20" Background="Transparent" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
+                            <TextBox Margin="0 20 0 20" Width="200" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0">
+                            </TextBox>
+                            <Button Margin="20" Background="Transparent" Command="{Binding RunCommand}" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
                                 <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
                                 <Button.RenderTransform>
                                     <ScaleTransform ScaleX="1" ScaleY="1" />
                                 </Button.RenderTransform>
-                                <Image Source="{Binding SearchButtonImage}"></Image>
-                            </Button>
-                            <Button Margin="20" Background="Transparent" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
-                                <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
-                                <Button.RenderTransform>
-                                    <ScaleTransform ScaleX="1" ScaleY="1" />
-                                </Button.RenderTransform>
-                                <Image Source="{Binding NewProccessButtonImage}"></Image>
+                                <Image Source="{Binding NewProcessButtonImage}"></Image>
                             </Button>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <DataGrid Background="Transparent" FontSize="15" RowHeight="35" ColumnHeaderStyle="{StaticResource CustomHeaderStyle}" Foreground="Azure" RowHeaderWidth="0"  GridLinesVisibility="Vertical" VerticalGridLinesBrush="#242424" RowBackground="#2b2b2b" BorderBrush="Transparent" AlternatingRowBackground="#1c1c1c" BorderThickness="0" AutoGenerateColumns="False" CellStyle="{StaticResource CenteringTextStyle}" ItemsSource="{Binding Processes}">
+                        <DataGrid Background="Transparent" Margin="10 0 0 0" FontSize="15" RowHeight="35" ColumnHeaderStyle="{StaticResource CustomHeaderStyle}" Foreground="Azure" RowHeaderWidth="0"  GridLinesVisibility="Vertical" VerticalGridLinesBrush="#242424" RowBackground="#2b2b2b" BorderBrush="Transparent" AlternatingRowBackground="#1c1c1c" BorderThickness="0" AutoGenerateColumns="False" CellStyle="{StaticResource CenteringTextStyle}" ItemsSource="{Binding Processes}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Process Name" Binding="{Binding ProcessName, Mode=OneWay}" Width="Auto" />
+                                <DataGridTextColumn>
+                                    
+                                </DataGridTextColumn>
                                 <DataGridTextColumn Header="Status" Binding="{Binding Status, Mode=OneWay}" Width="Auto"/>
-                                <DataGridTextColumn Header="Priority" Binding="{Binding Priority}" Width="Auto"/>
-                                <DataGridTextColumn Header="Cpu Usage" Binding="{Binding CpuUsage, Mode=OneWay}" Width="Auto"/>
                                 <DataGridTextColumn Header="Memory Usage" Binding="{Binding MemoryUsage, Mode=OneWay}" Width="Auto"/>
-                                <DataGridTextColumn Header="Disk Usage" Binding="{Binding Disk, Mode=OneWay}" Width="Auto"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>

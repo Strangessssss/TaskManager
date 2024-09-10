@@ -31,35 +31,4 @@ public static class ProcessManager
         return 0f;
     }
     
-    public static double UpdateTotalDiskUsage()
-    {
-        var processes = Process.GetProcesses();
-        double totalDiskUsage = 0;
-
-        foreach (var processInfo in processes)
-        {
-            try
-            {
-                var process = Process.GetProcessById(processInfo.Id);
-
-                using (var diskReadCounter = new PerformanceCounter("Process", "IO Read Bytes/sec", process.ProcessName))
-                using (var diskWriteCounter = new PerformanceCounter("Process", "IO Write Bytes/sec", process.ProcessName))
-                {
-                    var diskReadBytes = diskReadCounter.NextValue();
-                    var diskWriteBytes = diskWriteCounter.NextValue();
-
-                    var totalMBps = (diskReadBytes + diskWriteBytes) / (1024.0 * 1024.0);
-
-                    totalDiskUsage += totalMBps;
-                }
-            }
-            catch
-            {
-                return 0f;
-            }
-        }
-
-        return Math.Round(totalDiskUsage, 2);
-    }
-    
 }

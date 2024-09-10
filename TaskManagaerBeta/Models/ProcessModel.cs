@@ -1,23 +1,31 @@
+using System.ComponentModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using TaskManagaerBeta.Services;
 
 namespace TaskManagaerBeta.Models;
 
-public class ProcessModel: ObservableObject
+public partial class ProcessModel: ObservableObject
 {
     public ProcessModel(Process process)
     {
-        Process = process;
+        _process = process;
+        
+        Update(process);
     }
 
-    public Process Process;
+    private readonly Process _process;
 
-    public int Id => Process.Id;
-    public string ProcessName => Process.ProcessName;
-    public string Priority => Process.PriorityClass.ToString();
-    public string Status => Process.Responding ? "Running" : "Stopped";
-    public string CpuUsage => $"{ProcessManager.UpdateCpuUsage()}%";
-    public string MemoryUsage => $"{Process.WorkingSet64 / (1024.0 * 1024.0)}MB";
-    public string Disk =>$"{ProcessManager.UpdateTotalDiskUsage()}MB/s";
+    public int Id { get; set; }
+    public string? ProcessName { get; set; }
+    public string? Status { get; set; }
+    [ObservableProperty] private string? _memoryUsage;
+
+    public void Update(Process process)
+    {
+        Id = process.Id;
+        ProcessName = process.ProcessName;
+        Status = process.Responding ? "Running" : "Stopped";
+        MemoryUsage = $"{Math.Round(process.WorkingSet64 / (1024.0 * 1024.0), 2)}MB";
+    }
 }

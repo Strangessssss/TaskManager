@@ -1,24 +1,32 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CommunityToolkit.Mvvm.Messaging;
+using TaskManagaerBeta.Messages;
 
-namespace TaskManagaerBeta;
+namespace TaskManagaerBeta.Views;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
+
 public partial class TaskManager : Window
 {
     public TaskManager()
     {
         InitializeComponent();
     }
-    
+
+    private void HideShow(object sender, RoutedEventArgs e)
+    {
+        if (StackPanel.HorizontalAlignment == HorizontalAlignment.Center)
+        {
+            LeftPanel.Width = new GridLength(0.4, GridUnitType.Star);
+            StackPanel.HorizontalAlignment = HorizontalAlignment.Right;
+            return;
+        }
+        LeftPanel.Width = new GridLength(0.1, GridUnitType.Star);
+        StackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+    }
+
+    private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        WeakReferenceMessenger.Default.Send(new SearchChanged());
+    }
 }

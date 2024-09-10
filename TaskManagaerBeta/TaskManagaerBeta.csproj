@@ -18,25 +18,20 @@
 
     <ItemGroup>
       <None Remove="Images\new.png" />
-      <Resource Include="Images\new.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Images\arrows_counterclockwise.png" />
-      <Resource Include="Images\arrows_counterclockwise.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Images\arrow_forward.png" />
-      <Resource Include="Images\arrow_forward.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Images\black_square_for_stop.png" />
-      <Resource Include="Images\black_square_for_stop.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
       <None Remove="Images\mag_right.png" />
-      <Resource Include="Images\mag_right.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
+      <None Remove="Images\symbols.png" />
+      <None Remove="Images\wastebasket.png" />
+      <None Remove="Images\clown_face.png" />
+      <None Remove="ButtonAppearance\Images\grey_question.png" />
+      <None Remove="ButtonAppearance\ButonImageFileNames.json" />
+      <None Remove="ButtonAppearance\Images\arrow_forward.png" />
+      <None Remove="ButtonAppearance\Images\arrows_counterclockwise.png" />
+      <None Remove="ButtonAppearance\Images\black_square_for_stop.png" />
+      <None Remove="ButtonAppearance\Images\clown_face.png" />
+      <None Remove="ButtonAppearance\ButtonImageFileNames.json" />
     </ItemGroup>
 
     <ItemGroup>
@@ -45,7 +40,38 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Converters\" />
+      <Content Include="ButtonAppearance\ButtonImageFileNames.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="ButtonAppearance\Images\arrows_counterclockwise.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="ButtonAppearance\Images\arrow_forward.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="ButtonAppearance\Images\black_square_for_stop.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="ButtonAppearance\Images\clown_face.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="ButtonAppearance\Images\mag_right.png" />
+      <Content Include="ButtonAppearance\Images\mag_right.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="ButtonAppearance\Images\new.png" />
+      <Content Include="ButtonAppearance\Images\new.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="ButtonAppearance\Images\symbols.png" />
+      <Content Include="ButtonAppearance\Images\symbols.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Sounds\circus-clown-music.mp3" />
+      <None Remove="Sounds\circus-clown-music.wav" />
+      <Content Include="Sounds\circus-clown-music.wav">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>
