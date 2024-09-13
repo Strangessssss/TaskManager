@@ -22,6 +22,8 @@ public partial class TaskManagerViewModel : ObservableObject
     [ObservableProperty] private string _newProcessButtonImage = ButtonImageService.GetButonImage("NewProcess");
     [ObservableProperty] private string _clownModeButtonImage = ButtonImageService.GetButonImage("ClownMode");
     
+    
+    
     [ObservableProperty] private ObservableCollection<ProcessModel> _processes = new();
     private bool _updateFlag = true;
     private System.Timers.Timer _timer;
@@ -36,19 +38,26 @@ public partial class TaskManagerViewModel : ObservableObject
         _timer.Start();
     }
 
-    private void UpdateProcesses()
-    {
-        
-       if (_updateFlag)
+    private void UpdateProcesses(bool force = false)
+    { 
+       if (_updateFlag || force)
        {
            Application.Current.Dispatcher.Invoke(() =>
            {
+               if (Search.Length != 0)
+                   Processes = new ObservableCollection<ProcessModel>();
                foreach (var newProcess in Process.GetProcesses())
                {
                    var process = Processes.FirstOrDefault(p => p.Id == newProcess.Id);
                    if (process == null)
                    {
-                       Processes.Add(new ProcessModel(newProcess));
+                       if (Search.Length != 0 && newProcess.ProcessName.StartsWith(Search, StringComparison.CurrentCultureIgnoreCase))
+                       {
+                           Processes.Add(new ProcessModel(newProcess));
+                       }
+                       else if (Search.Length == 0)
+                           Processes.Add(new ProcessModel(newProcess));
+                           
                    }
                    else
                    {
@@ -67,7 +76,7 @@ public partial class TaskManagerViewModel : ObservableObject
             StopUpdateButtonImage = ButtonImageService.GetButonImage("Update");
             _updateFlag = false;
         }
-        UpdateProcesses();
+        UpdateProcesses(true);
     }
     
     [RelayCommand]
