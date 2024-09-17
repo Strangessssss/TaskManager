@@ -80,6 +80,14 @@
       <Content Include="Sounds\circus-clown-music.wav">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <None Remove="ButtonAppearance\Images\file_folder.png" />
+      <Content Include="ButtonAppearance\Images\file_folder.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="ButtonAppearance\Images\eye.png" />
+      <Content Include="ButtonAppearance\Images\eye.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

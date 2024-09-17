@@ -119,22 +119,48 @@
                 <ColumnDefinition x:Name="LeftPanel" Width="0.4*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Column="0" Background="#292929">
+            <Grid Column="0" Background="#292929 ">
                 <Grid ShowGridLines="False">
                     <Grid.RowDefinitions>
-                        <RowDefinition  Height="0.15*"/>
+                        <RowDefinition Height="0.15*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Grid >
-                        <StackPanel x:Name="StackPanel" HorizontalAlignment="Right">
-                            <Button Margin="10" Width="40" Background="Transparent" Click="HideShow" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
-                                <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
-                                <Button.RenderTransform>
-                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                </Button.RenderTransform>
-                                <Image Source="/ButtonAppearance/Images/symbols.png"/>
-                            </Button>
-                        </StackPanel>
+                    <Border BorderBrush="Gray" BorderThickness="0 0 0 1">
+                        <Grid>
+                            <StackPanel x:Name="StackPanel" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <Button Margin="10" Width="40" Background="Transparent" Click="HideShow" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
+                                    <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                                    <Button.RenderTransform>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Button.RenderTransform>
+                                    <Image Source="/ButtonAppearance/Images/symbols.png"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Grid Grid.Row="1">
+                        <StackPanel Grid.Row="0" x:Name="ReactionTestButton" HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="ReactionTestText" FontWeight="Bold" Foreground="Azure" Margin="0, 40, 0, 0" VerticalAlignment="Center">Reaction Test</TextBlock>
+                                <Button Margin="15 40 10 0" Width="40" Background="Transparent" Click="HideShow" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
+                                    <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                                    <Button.RenderTransform>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Button.RenderTransform>
+                                    <Image Source="/ButtonAppearance/Images/eye.png"/>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontWeight="Bold"  x:Name="ArchivatorText" Margin="0, 40, 0, 0" VerticalAlignment="Center" Foreground="Azure">File archivator</TextBlock>
+                                <Button x:Name="RarButton" Margin="15 30 10 0" Width="40" Background="Transparent" Click="HideShow" BorderBrush="Transparent" Style="{StaticResource AnimatedButtonStyle}">
+                                    <Button.RenderTransformOrigin>0.5,0.5</Button.RenderTransformOrigin>
+                                    <Button.RenderTransform>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </Button.RenderTransform>
+                                    <Image Source="/ButtonAppearance/Images/file_folder.png"/>
+                                </Button>
+                            </StackPanel>
+                            </StackPanel>
                     </Grid>
                 </Grid>
             </Grid>
